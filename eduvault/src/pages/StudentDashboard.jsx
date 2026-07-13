@@ -37,6 +37,15 @@ function StudentDashboard() {
               to={`/notes/${encodeURIComponent(subject)}`}
               className="subject-card"
             >
+              <span className="catalog-tag">
+                {subject
+                  .split(" ")
+                  .map((w) => w[0])
+                  .join("")
+                  .slice(0, 3)
+                  .toUpperCase()}
+              </span>
+              
               {subject}
             </Link>
           ))}

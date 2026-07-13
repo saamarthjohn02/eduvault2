@@ -1,69 +1,177 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
+.notes-page {
+  min-height: 100vh;
+  background: var(--parchment);
+  padding: 46px 52px;
 }
 
-.notes-page{
-    min-height:100vh;
-    background:#f4f6f9;
-    padding:50px;
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
 }
 
-.notes-page h1{
-    color:#1565c0;
-    margin-bottom:40px;
+.notes-page h1 {
+  font-size: 26px;
+  color: var(--ink);
 }
 
-.notes-container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:25px;
-}
-
-.note-card{
-    background:white;
-    padding:25px;
-    border-radius:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,.1);
-}
-
-.note-card h2{
-    margin-bottom:15px;
-}
-
-.note-card p{
-    margin-bottom:20px;
-    color:#666;
-}
-
-.note-card button{
-    width:100%;
-    padding:12px;
-    border:none;
-    background:#1565c0;
-    color:white;
-    border-radius:6px;
-    cursor:pointer;
-}
-
-.note-card button:hover{
-    background:#0d47a1;
-}
 .back-link {
   display: inline-block;
-  margin-bottom: 20px;
-  color: #2e7d32;
+  margin-bottom: 24px;
+  color: var(--vault-green);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 13.5px;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.upload-btn {
+  background: var(--vault-green);
+  color: var(--paper-white);
+  border: none;
+  padding: 11px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.upload-btn:hover {
+  background: #3a8462;
+}
+
+.notes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* signature: note as an index / catalog card, dashed stitch edge + torn corner */
+.note-card {
+  background: var(--paper-white);
+  border: 1px dashed var(--parchment-2);
+  border-left: 3px solid var(--brass);
+  border-radius: 6px;
+  padding: 22px 22px 20px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.note-card h2 {
+  font-size: 16.5px;
+  color: var(--ink);
+  margin-bottom: 8px;
+  padding-right: 10px;
+}
+
+.note-card p {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 0 10px;
+}
+
+.note-subject {
+  display: inline-block;
+  background: var(--vault-green-light);
+  color: var(--vault-green-dark);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  margin-bottom: 12px !important;
 }
 
 .note-teacher {
-  font-size: 13px;
-  color: #888 !important;
+  font-size: 12.5px;
+  color: var(--text-muted) !important;
+  font-style: italic;
 }
 
+.note-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.note-actions button,
+.note-card > a > button {
+  border: none;
+  padding: 9px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--paper-white);
+  font-size: 13.5px;
+  font-weight: 600;
+  background: var(--vault-green);
+  transition: background 0.2s;
+}
+
+.note-card > a {
+  text-decoration: none;
+}
+
+.note-actions button:hover,
+.note-card > a > button:hover {
+  background: #3a8462;
+}
+
+.note-actions button:disabled {
+  background: var(--parchment-2);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.note-actions .delete-btn {
+  background: transparent;
+  color: var(--stamp-red);
+  border: 1px solid var(--stamp-red);
+}
+
+.note-actions .delete-btn:hover {
+  background: var(--stamp-red);
+  color: var(--paper-white);
+}
+
+.empty-notes,
 .no-notes {
-  color: #666;
+  background: var(--paper-white);
+  border: 1px dashed var(--parchment-2);
+  border-radius: var(--radius);
+  padding: 48px 30px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.empty-notes h2 {
+  color: var(--ink);
+  font-size: 19px;
+  margin-bottom: 10px;
+}
+
+.empty-notes p {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.error {
+  color: var(--stamp-red);
+  font-size: 13.5px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 720px) {
+  .notes-page {
+    padding: 30px 22px;
+  }
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
 }

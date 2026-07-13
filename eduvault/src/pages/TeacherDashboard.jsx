@@ -63,8 +63,17 @@ function TeacherDashboard() {
         <div className="subjects">
           {SUBJECTS.map((subject) => (
             <div key={subject} className="subject-card">
+              <span className="catalog-tag">
+                {subject
+                  .split(" ")
+                  .map((w) => w[0])
+                  .join("")
+                  .slice(0, 3)
+                  .toUpperCase()}
+              </span>
               {subject}
             </div>
+            
           ))}
         </div>
       </main>
