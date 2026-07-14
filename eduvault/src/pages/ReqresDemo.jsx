@@ -63,7 +63,7 @@ function ReqresDemo() {
         ← Back
       </Link>
 
-      <h1>Reqres API Demo</h1>
+      <h1>Reqres API</h1>
       <p className="reqres-intro">
         Live GET and PUT calls to{" "}
         <a href="https://reqres.in" target="_blank" rel="noreferrer">
