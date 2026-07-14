@@ -48,7 +48,6 @@
   text-decoration: none;
 }
 
-/* HERO */
 .hero {
   background: var(--ink);
   color: var(--text-on-ink);
@@ -103,7 +102,6 @@
   transform: translateY(-1px);
 }
 
-/* FEATURES */
 .features {
   padding: 90px 24px 40px;
   text-align: center;
@@ -115,7 +113,7 @@
   color: var(--ink);
 }
 
-.cards {
+.feature-cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 22px;
@@ -123,7 +121,7 @@
   margin: 0 auto;
 }
 
-.card {
+.feature-card {
   background: var(--paper-white);
   border: 1px solid var(--parchment-2);
   border-radius: var(--radius);
@@ -133,30 +131,30 @@
   transition: transform 0.18s, box-shadow 0.18s;
 }
 
-.card:hover {
+.feature-card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lift);
 }
 
-.card h3 {
+.feature-card h3 {
   font-size: 17px;
   margin-bottom: 10px;
   color: var(--ink);
 }
 
-.card p {
+.feature-card p {
   font-size: 14px;
   color: var(--text-muted);
   line-height: 1.55;
   margin: 0;
 }
 
-/* SUBJECTS - styled like a card-catalog drawer */
-.subjects {
+.subjects-section {
   padding: 80px 24px;
 }
 
 .subjects-container {
+  width: 100%;
   max-width: 880px;
   margin: 0 auto;
   background: var(--paper-white);
@@ -201,7 +199,6 @@
   flex-shrink: 0;
 }
 
-/* STEPS */
 .steps {
   padding: 20px 24px 90px;
   text-align: center;
@@ -243,7 +240,6 @@
   border-radius: var(--radius) var(--radius) 0 0;
 }
 
-/* ABOUT */
 .about {
   background: var(--ink);
   color: var(--text-on-ink);
@@ -294,7 +290,6 @@
   margin: 0;
 }
 
-/* CONTACT */
 .contact {
   padding: 80px 24px;
   text-align: center;
@@ -322,7 +317,7 @@ footer {
 }
 
 @media (max-width: 900px) {
-  .cards, .step-box, .about-cards {
+  .feature-cards, .step-box, .about-cards {
     grid-template-columns: 1fr 1fr;
   }
   .navbar {
@@ -334,7 +329,7 @@ footer {
 }
 
 @media (max-width: 560px) {
-  .cards, .step-box, .about-cards {
+  .feature-cards, .step-box, .about-cards {
     grid-template-columns: 1fr;
   }
   .navbar nav {
