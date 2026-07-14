@@ -11,6 +11,7 @@ import TeacherDashboard from "./pages/TeacherDashboard";
 import UploadNotes from "./pages/UploadNotes";
 import Notes from "./pages/Notes";
 import MyNotes from "./pages/MyNotes";
+import ReqresDemo from "./pages/ReqresDemo";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
@@ -64,9 +65,16 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/reqres-demo"
+          element={
+            <ProtectedRoute>
+              <ReqresDemo />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
 }
-
 export default App;

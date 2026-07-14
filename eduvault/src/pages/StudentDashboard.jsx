@@ -20,6 +20,9 @@ function StudentDashboard() {
         <ul>
           <li>🏠 Dashboard</li>
           <li>👤 {user?.name}</li>
+          <li>
+            <Link to="/reqres-demo">🔗 Reqres Demo</Link>
+          </li>
           <li onClick={handleLogout} style={{ cursor: "pointer" }}>
             🚪 Logout
           </li>
@@ -45,7 +48,6 @@ function StudentDashboard() {
                   .slice(0, 3)
                   .toUpperCase()}
               </span>
-              
               {subject}
             </Link>
           ))}

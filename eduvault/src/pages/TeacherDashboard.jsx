@@ -36,6 +36,9 @@ function TeacherDashboard() {
             </Link>
           </li>
           <li>👤 {user?.name}</li>
+          <li>
+            <Link to="/reqres-demo">🔗 Reqres Demo</Link>
+          </li>
           <li onClick={handleLogout} style={{ cursor: "pointer" }}>
             🚪 Logout
           </li>
@@ -73,7 +76,6 @@ function TeacherDashboard() {
               </span>
               {subject}
             </div>
-            
           ))}
         </div>
       </main>
