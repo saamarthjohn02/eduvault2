@@ -37,3 +37,19 @@ export async function updateUser(id, { first_name, last_name, email }) {
 
   return data;
 }
+
+export async function createUser({ first_name, last_name, email }) {
+  const res = await fetch(`${BASE_URL}/users`, {
+    method: "POST",
+    headers: headers(),
+    body: JSON.stringify({ first_name, last_name, email }),
+  });
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.error || "Could not create user.");
+  }
+
+  return data;
+}

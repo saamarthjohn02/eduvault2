@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getUsers, updateUser } from "../utils/reqres";
+import { getUsers, updateUser, createUser } from "../utils/reqres";
 import "./ReqresDemo.css";
 
 function ReqresDemo() {
@@ -12,6 +12,10 @@ function ReqresDemo() {
   const [form, setForm] = useState({ first_name: "", last_name: "", email: "" });
   const [saving, setSaving] = useState(false);
   const [savedMessage, setSavedMessage] = useState("");
+
+  const [showCreateForm, setShowCreateForm] = useState(false);
+  const [createForm, setCreateForm] = useState({ first_name: "", last_name: "", email: "" });
+  const [creating, setCreating] = useState(false);
 
   useEffect(() => {
     loadUsers();
@@ -57,25 +61,95 @@ function ReqresDemo() {
     }
   }
 
+  async function handleCreate(e) {
+    e.preventDefault();
+    setCreating(true);
+    setError("");
+    try {
+      const newUser = await createUser(createForm);
+      setUsers((prev) => [
+        {
+          id: newUser.id,
+          first_name: createForm.first_name,
+          last_name: createForm.last_name,
+          email: createForm.email,
+          avatar: "https://reqres.in/img/faces/7-image.jpg",
+        },
+        ...prev,
+      ]);
+      setSavedMessage(`New user #${newUser.id} created (reqres echoed the record back).`);
+      setCreateForm({ first_name: "", last_name: "", email: "" });
+      setShowCreateForm(false);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setCreating(false);
+    }
+  }
+
   return (
     <div className="reqres-page">
       <Link to="/" className="back-link">
         ← Back
       </Link>
 
-      <h1>Reqres API</h1>
+      <h1>The Telegraph Desk</h1>
       <p className="reqres-intro">
-        Live GET and PUT calls to{" "}
+        A live wire out to{" "}
         <a href="https://reqres.in" target="_blank" rel="noreferrer">
           reqres.in
         </a>{" "}
-        — a mock REST API. Edits are echoed back by reqres but not actually
-        stored on their server, so this is just for practicing real HTTP
-        request/response handling.
+        — records fetched and dispatched over a real GET and PUT exchange.
+        Edits are echoed back but not stored on their end, so this desk is
+        purely for practicing genuine request/response handling.
       </p>
 
       {error && <p className="error">{error}</p>}
       {savedMessage && <p className="success">{savedMessage}</p>}
+
+      <div className="create-bar">
+        <button
+          className="edit-btn"
+          onClick={() => setShowCreateForm((v) => !v)}
+        >
+          {showCreateForm ? "Cancel" : "+ Add New User (POST)"}
+        </button>
+      </div>
+
+      {showCreateForm && (
+        <form className="create-user-form" onSubmit={handleCreate}>
+          <input
+            type="text"
+            placeholder="First name"
+            value={createForm.first_name}
+            onChange={(e) =>
+              setCreateForm({ ...createForm, first_name: e.target.value })
+            }
+            required
+          />
+          <input
+            type="text"
+            placeholder="Last name"
+            value={createForm.last_name}
+            onChange={(e) =>
+              setCreateForm({ ...createForm, last_name: e.target.value })
+            }
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={createForm.email}
+            onChange={(e) =>
+              setCreateForm({ ...createForm, email: e.target.value })
+            }
+            required
+          />
+          <button className="save-btn" type="submit" disabled={creating}>
+            {creating ? "Creating..." : "Create (POST)"}
+          </button>
+        </form>
+      )}
 
       {loading ? (
         <p>Loading users...</p>

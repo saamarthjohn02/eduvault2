@@ -52,6 +52,43 @@
   display: inline-block;
 }
 
+.create-bar {
+  margin-bottom: 18px;
+}
+
+.create-user-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(22, 35, 61, 0.1);
+  border-top: 3px solid var(--vault-green);
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+}
+
+.create-user-form input {
+  flex: 1 1 160px;
+  padding: 9px 12px;
+  border: 1px solid var(--parchment-2);
+  border-radius: 6px;
+  font-size: 13.5px;
+  background: var(--parchment);
+  outline: none;
+}
+
+.create-user-form input:focus {
+  border-color: var(--vault-green);
+  background: var(--paper-white);
+}
+
+.create-user-form .save-btn {
+  flex: 0 0 auto;
+  padding: 10px 20px;
+}
+
 .user-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
