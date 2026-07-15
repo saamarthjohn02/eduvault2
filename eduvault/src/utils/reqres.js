@@ -53,3 +53,21 @@ export async function createUser({ first_name, last_name, email }) {
 
   return data;
 }
+
+export async function deleteUser(id) {
+  const res = await fetch(`${BASE_URL}/users/${id}`, {
+    method: "DELETE",
+    headers: headers(),
+  });
+
+  if (!res.ok) {
+    let message = "Could not delete user.";
+    try {
+      const data = await res.json();
+      message = data.error || message;
+    } catch {
+      message = message;
+    }
+    throw new Error(message);
+  }
+}

@@ -139,6 +139,38 @@
   background: #3a8462;
 }
 
+.card-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.card-actions .edit-btn,
+.card-actions .delete-btn {
+  flex: 1;
+}
+
+.delete-btn {
+  background: transparent;
+  color: var(--stamp-red);
+  border: 1px solid var(--stamp-red);
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background: var(--stamp-red);
+  color: var(--paper-white);
+}
+
+.delete-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .edit-form {
   display: flex;
   flex-direction: column;

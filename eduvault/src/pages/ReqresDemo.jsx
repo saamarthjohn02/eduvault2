@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getUsers, updateUser, createUser } from "../utils/reqres";
+import { getUsers, updateUser, createUser, deleteUser } from "../utils/reqres";
+import { getCurrentUser } from "../utils/auth";
 import "./ReqresDemo.css";
 
 function ReqresDemo() {
+  const currentUser = getCurrentUser();
+  const isTeacher = currentUser?.role === "teacher";
+
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -16,6 +20,8 @@ function ReqresDemo() {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [createForm, setCreateForm] = useState({ first_name: "", last_name: "", email: "" });
   const [creating, setCreating] = useState(false);
+
+  const [deletingId, setDeletingId] = useState(null);
 
   useEffect(() => {
     loadUsers();
@@ -87,6 +93,20 @@ function ReqresDemo() {
     }
   }
 
+  async function handleDelete(id) {
+    setDeletingId(id);
+    setError("");
+    try {
+      await deleteUser(id);
+      setUsers((prev) => prev.filter((u) => u.id !== id));
+      setSavedMessage(`User #${id} deleted.`);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setDeletingId(null);
+    }
+  }
+
   return (
     <div className="reqres-page">
       <Link to="/" className="back-link">
@@ -99,11 +119,11 @@ function ReqresDemo() {
         <a href="https://reqres.in" target="_blank" rel="noreferrer">
           reqres.in
         </a>{" "}
-        — records fetched and dispatched over a real GET and PUT exchange.
-        Edits are echoed back but not stored on their end, so this desk is
-        purely for practicing genuine request/response handling.
+       — records fetched and dispatched over a real GET, POST, PUT, and
+        DELETE exchange. Edits are echoed back but not stored on their end,
+        so this desk is purely for practicing genuine request/response
+        handling.
       </p>
-
       {error && <p className="error">{error}</p>}
       {savedMessage && <p className="success">{savedMessage}</p>}
 
@@ -202,9 +222,20 @@ function ReqresDemo() {
                     {user.first_name} {user.last_name}
                   </h2>
                   <p>{user.email}</p>
-                  <button className="edit-btn" onClick={() => startEdit(user)}>
-                    Edit
-                  </button>
+                  <div className="card-actions">
+                    <button className="edit-btn" onClick={() => startEdit(user)}>
+                      Edit
+                    </button>
+                    {isTeacher && (
+                      <button
+                        className="delete-btn"
+                        onClick={() => handleDelete(user.id)}
+                        disabled={deletingId === user.id}
+                      >
+                        {deletingId === user.id ? "Deleting..." : "Delete"}
+                      </button>
+                    )}
+                  </div>
                 </>
               )}
             </div>
