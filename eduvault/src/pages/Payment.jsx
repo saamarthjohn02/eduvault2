@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams, Navigate } from "react-router-dom";
 import { getCurrentUser, getPaymentStatus, logout } from "../utils/auth";
 import { payFor, PRICES } from "../utils/payment";
+import paymentImg from "../assets/undraw_online-payments_d5ef.png";
 import "./Payment.css";
 
 const COPY = {
@@ -57,6 +58,7 @@ function Payment() {
   return (
     <div className="payment-page">
       <div className="payment-box">
+        <img className="payment-illustration" src={paymentImg} alt="Person making a secure payment" />
         <h1>{title}</h1>
         <p className="subtitle">{blurb}</p>
 

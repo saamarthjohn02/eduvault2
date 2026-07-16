@@ -74,11 +74,41 @@
   color: var(--ink);
   margin-bottom: 8px;
 }
-
 .content > p {
   color: var(--text-muted);
   font-size: 14.5px;
   margin: 0 0 34px;
+}
+
+.content-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 10px;
+}
+
+.content-header h1 {
+  margin-bottom: 8px;
+}
+
+.content-header > p {
+  margin: 0;
+}
+
+.banner-img {
+  width: 180px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+  .content-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  .banner-img {
+    width: 140px;
+  }
 }
 
 .stats {

@@ -19,6 +19,13 @@
   font-size: 30px;
 }
 
+.payment-illustration {
+  width: 100%;
+  max-width: 220px;
+  margin: 0 auto 18px;
+  display: block;
+}
+
 .payment-box .subtitle {
   color: var(--text-on-ink-muted);
   font-size: 14px;

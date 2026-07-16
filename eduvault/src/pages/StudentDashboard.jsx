@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { getCurrentUser, logout } from "../utils/auth";
 import { SUBJECTS } from "../utils/notes";
+import bannerImg from "../assets/undraw_learning-to-sketch_uaxi.png";
 import "./StudentDashboard.css";
 
 function StudentDashboard() {
@@ -30,8 +31,13 @@ function StudentDashboard() {
       </aside>
 
       <main className="content">
-        <h1>Welcome {user?.name} 👋</h1>
-        <p>Select a subject to view available notes.</p>
+        <div className="content-header">
+          <div>
+            <h1>Welcome {user?.name} 👋</h1>
+            <p>Select a subject to view available notes.</p>
+          </div>
+          <img className="banner-img" src={bannerImg} alt="Student taking notes" />
+        </div>
 
         <div className="subjects">
           {SUBJECTS.map((subject) => (

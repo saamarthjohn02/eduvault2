@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import heroImg from "../assets/undraw_education_3vwh.png";
 import "./LandingPage.css";
 
 function LandingPage() {
@@ -17,14 +18,22 @@ function LandingPage() {
       </header>
 
       <section id="home" className="hero">
-        <h1>Student Learning Portal</h1>
-        <p>
-          Access all your subject notes uploaded by your teachers anytime,
-          anywhere.
-        </p>
-        <Link to="/login">
-          <button className="hero-btn">Get Started</button>
-        </Link>
+        <div className="hero-inner">
+          <div className="hero-text">
+            <h1>Student Learning Portal</h1>
+            <p>
+              Access all your subject notes uploaded by your teachers anytime,
+              anywhere.
+            </p>
+            <Link to="/login">
+              <button className="hero-btn">Get Started</button>
+            </Link>
+          </div>
+
+          <div className="hero-image">
+            <img src={heroImg} alt="Student standing on a stack of books" />
+          </div>
+        </div>
       </section>
 
       <section className="features">

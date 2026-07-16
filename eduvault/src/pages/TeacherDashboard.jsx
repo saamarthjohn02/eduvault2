@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getCurrentUser, logout } from "../utils/auth";
 import { getNotesByTeacher, SUBJECTS } from "../utils/notes";
+import bannerImg from "../assets/undraw_teacher_n0ow.png";
 import "./TeacherDashboard.css";
 
 function TeacherDashboard() {
@@ -46,8 +47,13 @@ function TeacherDashboard() {
       </aside>
 
       <main className="content">
-        <h1>Welcome {user?.name} 👋</h1>
-        <p>Manage your study material and upload notes for students.</p>
+        <div className="content-header">
+          <div>
+            <h1>Welcome {user?.name} 👋</h1>
+            <p>Manage your study material and upload notes for students.</p>
+          </div>
+          <img className="banner-img" src={bannerImg} alt="Teacher sharing documents" />
+        </div>
 
         <div className="stats">
           <div className="stat-card">
