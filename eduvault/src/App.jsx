@@ -12,6 +12,7 @@ import UploadNotes from "./pages/UploadNotes";
 import Notes from "./pages/Notes";
 import MyNotes from "./pages/MyNotes";
 import ReqresDemo from "./pages/ReqresDemo";
+import Payment from "./pages/Payment";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 function App() {
@@ -26,9 +27,18 @@ function App() {
         <Route path="/teacher-register" element={<TeacherRegister />} />
 
         <Route
-          path="/student-dashboard"
+          path="/payment/:purpose"
           element={
             <ProtectedRoute role="student">
+              <Payment />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/student-dashboard"
+          element={
+            <ProtectedRoute role="student" requirePayment="portal">
               <StudentDashboard />
             </ProtectedRoute>
           }
@@ -60,7 +70,7 @@ function App() {
         <Route
           path="/notes/:subject"
           element={
-            <ProtectedRoute role="student">
+            <ProtectedRoute role="student" requirePayment="notes">
               <Notes />
             </ProtectedRoute>
           }
