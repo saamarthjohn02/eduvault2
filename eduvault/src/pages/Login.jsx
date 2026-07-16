@@ -56,6 +56,25 @@ function Login() {
 
           </div>
 
+          <div className="card">
+
+            <h2>🛡️ Admin</h2>
+
+            <p>
+              Manage users, notes and payments across the portal.
+            </p>
+
+            <Link to="/admin-login">
+              <button>Admin Login</button>
+            </Link>
+
+            <p className="register-link">
+              Don't have an account?
+              <Link to="/admin-register"> Register</Link>
+            </p>
+
+          </div>
+
         </div>
 
         <Link className="back-home" to="/">
