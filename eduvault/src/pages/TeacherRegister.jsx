@@ -12,7 +12,7 @@ function TeacherRegister() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (
       name.trim() === "" ||
       email.trim() === "" ||
@@ -33,7 +33,7 @@ function TeacherRegister() {
       return;
     }
 
-    const result = registerUser({
+    const result =  await registerUser({
       role: "teacher",
       name,
       email,
