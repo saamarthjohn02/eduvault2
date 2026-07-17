@@ -61,6 +61,36 @@
   background: var(--paper-white);
 }
 
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 42px;
+}
+
+.password-field .toggle-password,
+.login-card .password-field .toggle-password,
+.login-card button.toggle-password[type="button"] {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto;
+  height: auto;
+  background: none;
+  color: inherit;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 6px 8px;
+  margin-top: 0;
+  line-height: 1;
+}
+
+.login-card .password-field .toggle-password:hover {
+  background: none;
+}
 .error {
   color: var(--stamp-red);
   font-size: 13px;
