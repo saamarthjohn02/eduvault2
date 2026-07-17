@@ -13,13 +13,15 @@ function Login() {
           Choose your login portal
         </p>
 
-        
+
         <div className="cards">
 
-          
-          <div className="card">
 
-            <h2>🎓 Student</h2>
+          <div className="card card-student">
+
+            <span className="card-icon">🎓</span>
+
+            <h2>Student</h2>
 
             <p>
               Access your subjects, notes and downloads.
@@ -36,10 +38,12 @@ function Login() {
 
           </div>
 
-          
-          <div className="card">
 
-            <h2>👨‍🏫 Teacher</h2>
+          <div className="card card-teacher">
+
+            <span className="card-icon">👨‍🏫</span>
+
+            <h2>Teacher</h2>
 
             <p>
               Upload notes and manage your subjects.
@@ -56,9 +60,11 @@ function Login() {
 
           </div>
 
-          <div className="card">
+          <div className="card card-admin">
 
-            <h2>🛡️ Admin</h2>
+            <span className="card-icon">🛡️</span>
+
+            <h2>Admin</h2>
 
             <p>
               Manage users, notes and payments across the portal.
