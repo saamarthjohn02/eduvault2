@@ -9,7 +9,6 @@ function authHeaders() {
   };
 }
 
-// Asks the backend to create a Razorpay order for the given purpose.
 async function createOrder(purpose) {
   const res = await fetch(`${API_URL}/payment/create-order`, {
     method: "POST",
@@ -18,11 +17,9 @@ async function createOrder(purpose) {
   });
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || "Could not start payment.");
-  return data; // { orderId, amount, currency, keyId }
+  return data;
 }
 
-// Sends the payment result to the backend so it can verify the signature
-// and (if valid) unlock the relevant access flag.
 async function verifyPayment({ orderId, paymentId, signature, purpose }) {
   const res = await fetch(`${API_URL}/payment/verify`, {
     method: "POST",
@@ -39,9 +36,6 @@ async function verifyPayment({ orderId, paymentId, signature, purpose }) {
   return data;
 }
 
-// Opens the Razorpay checkout popup for the given purpose ("portal" | "notes").
-// Returns a promise that resolves once payment is created AND verified,
-// or rejects if the user cancels or something fails.
 export function payFor(purpose) {
   return new Promise(async (resolve, reject) => {
     if (!window.Razorpay) {
@@ -69,14 +63,14 @@ export function payFor(purpose) {
       theme: { color: "#4f46e5" },
       handler: async (response) => {
         try {
-          await verifyPayment({
+          const result = await verifyPayment({
             orderId: response.razorpay_order_id,
             paymentId: response.razorpay_payment_id,
             signature: response.razorpay_signature,
             purpose,
           });
-          await refreshPaymentStatus(); // update cached status so ProtectedRoute sees it
-          resolve();
+          await refreshPaymentStatus();
+          resolve(result.paymentId);
         } catch (err) {
           reject(err);
         }
@@ -95,3 +89,33 @@ export const PRICES = {
   portal: "₹50",
   notes: "₹100",
 };
+
+export async function getMyPayments() {
+  const res = await fetch(`${API_URL}/payment/my-payments`, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "Could not load payments.");
+  return data.payments;
+}
+
+export async function downloadInvoice(paymentId) {
+  const res = await fetch(`${API_URL}/payment/invoice/${paymentId}`, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => ({}));
+    throw new Error(data.error || "Could not download invoice.");
+  }
+
+  const blob = await res.blob();
+  const url = window.URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `eduvault-invoice-${paymentId}.pdf`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.URL.revokeObjectURL(url);
+}

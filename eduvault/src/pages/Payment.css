@@ -76,6 +76,17 @@
   cursor: not-allowed;
 }
 
+.payment-card .secondary-btn {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--parchment-2);
+  margin-top: 10px;
+}
+
+.payment-card .secondary-btn:hover:not(:disabled) {
+  background: var(--parchment);
+}
+
 .payment-card .error {
   color: #c0392b;
   font-size: 13px;
