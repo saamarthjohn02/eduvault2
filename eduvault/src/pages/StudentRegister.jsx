@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { registerUser } from "../utils/auth";
+import { COURSES } from "../utils/courses";
 import "./StudentRegister.css";
 
 function StudentRegister() {
@@ -71,12 +72,18 @@ function StudentRegister() {
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <input
-          type="text"
-          placeholder="Course"
+        <select
+          className="course-select"
           value={course}
           onChange={(e) => setCourse(e.target.value)}
-        />
+        >
+          <option value="">Select Course</option>
+          {COURSES.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
 
         <input
           type="text"

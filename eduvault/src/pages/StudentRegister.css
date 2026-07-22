@@ -24,7 +24,8 @@
   margin-bottom: 26px;
 }
 
-.register-card input {
+.register-card input,
+.register-card select {
   width: 100%;
   padding: 11px 13px;
   border: 1px solid var(--parchment-2);
@@ -34,9 +35,12 @@
   outline: none;
   margin-bottom: 14px;
   transition: border-color 0.2s, background 0.2s;
+  font-family: inherit;
+  color: var(--ink);
 }
 
-.register-card input:focus {
+.register-card input:focus,
+.register-card select:focus {
   border-color: var(--vault-green);
   background: var(--paper-white);
 }
